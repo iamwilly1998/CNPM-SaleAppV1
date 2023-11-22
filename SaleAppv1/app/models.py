@@ -10,13 +10,13 @@ class UserRoleEnum(enum.Enum):
     ADMIN = 2
 
 
-class User(db.Model,UserMixin):
-    id= Column(Integer,primary_key=True,autoincrement=True)
-    name= Column(String(50),nullable=False,unique=True)
-    username = Column(String(50),nullable=False,unique=True)
-    password=Column(String(100),nullable=False)
+class User(db.Model, UserMixin):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(50), nullable=False, unique=True)
+    username = Column(String(50), nullable=False, unique=True)
+    password = Column(String(100), nullable=False)
     avatar = Column(String(100), default='https://static2-images.vnncdn.net/files/publish/2022/12/8/meo-1-1416.jpg')
-    user_role = Column(Enum(UserRoleEnum), default= UserRoleEnum.USER)
+    user_role = Column(Enum(UserRoleEnum), default=UserRoleEnum.USER)
 
     def __str__(self):
         return self.name
@@ -27,8 +27,7 @@ class Category(db.Model):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(50), nullable=False, unique=True)
-    products = relationship('Product',backref='category', lazy= True)
-
+    products = relationship('Product', backref='category', lazy=True)
 
     def __str__(self):
         return self.name
@@ -39,8 +38,7 @@ class Product(db.Model):
     name = Column(String(50), nullable=False, unique=True)
     price = Column(Float, default=0)
     image = Column(String(100))
-    category_id = Column(Integer, ForeignKey(Category.id), nullable= False)
-
+    category_id = Column(Integer, ForeignKey(Category.id), nullable=False)
 
     def __str__(self):
         return self.name
@@ -54,10 +52,10 @@ if __name__ == '__main__':
         #
         # u = User(name='Admin', username='admin',
         #          password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),
-        #          user_role= UserRoleEnum.ADMIN)
+        #          user_role=UserRoleEnum.ADMIN)
         # db.session.add(u)
         # db.session.commit()
-
+        #
         # c1 = Category(name='Mobile')
         # c2 = Category(name='Tablet')
         # c3 = Category(name='Desktop')

@@ -28,7 +28,6 @@ class MyProductView(AuthenticatedAdmin):
     edit_modal = True
 
 
-
 class MyCategoryView(AuthenticatedAdmin):
     column_list = ['name', 'products']
 
@@ -37,6 +36,7 @@ class StatsView(AuthenticatedUser):
     @expose('/')
     def index(self):
         return self.render('admin/stats.html')
+
 
 class LogoutView(AuthenticatedUser):
     @expose('/')
@@ -49,4 +49,4 @@ class LogoutView(AuthenticatedUser):
 admin.add_view(MyCategoryView(Category, db.session))
 admin.add_view(MyProductView(Product, db.session))
 admin.add_view(StatsView(name='Thống kê báo cáo'))
-admin.add_view(LogoutView(name ='Đăng xuất'))
+admin.add_view(LogoutView(name='Đăng xuất'))
